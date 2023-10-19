@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Usuarios</title>
+</head>
+<body>
+  <h2>Registro de Usuarios</h2>
+  <form id="registroForm">
+    <label for="nombre">Nombre:</label><br>
+    <input type="text" id="nombre" name="nombre"><br>
+    <label for="licenciatura">Licenciatura:</label><br>
+    <input type="text" id="licenciatura" name="licenciatura"><br>
+    <label for="correo">Correo electrónico:</label><br>
+    <input type="text" id="correo" name="correo"><br><br>
+    <label for="buzon">Buzon:</label><br>
+    <input type="text" id="buzon" name="buzon"><br><br>
+    <input type="submit" value="Registrarse">
+  </form>
+
+  <script>
+    document.getElementById('registroForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const nombre = document.getElementById('nombre').value;
+      const correo = document.getElementById('correo').value;
+
+      // Enviar datos a Node-RED
+      fetch('http://localhost:1880/registro', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ nombre, correo })
+      });
+    });
+  </script>
+</body>
+</html>
